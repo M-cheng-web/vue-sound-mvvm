@@ -21,7 +21,7 @@
     new MVVM({
       el: "#mvvm-app",
       data: {
-        title: "hello world",
+        title: "hello",
       },
       computed: {
         age() {
@@ -43,6 +43,7 @@
       methods: {
         clickBtnTitle: function (e) {
           this.title = "cheng";
+          this.ttss = "xxx";
         },
         clickBtn: function (e) {
           console.log("age3", this.age3);

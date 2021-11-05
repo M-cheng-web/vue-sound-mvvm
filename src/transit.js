@@ -4,13 +4,11 @@
 import Watcher from './watcher.js'
 import { computed } from './computed.js'
 
-function transit(vm, exp, fun) {
+function transit(vm, exp, cb) {
   if (vm.data[exp]) {
-    new Watcher(vm, exp, fun);
-    fun.call(vm, vm[exp])
+    new Watcher(vm, exp, cb);
   } else {
-    new computed(vm, exp, fun);
-    console.log('实验', vm[exp]);
+    new computed(vm, exp, cb);
   }
 }
 

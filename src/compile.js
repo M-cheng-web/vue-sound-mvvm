@@ -24,7 +24,7 @@ Compile.prototype = {
     while (child) {
       // 将Dom元素移入fragment中
       fragment.appendChild(child);
-      child = el.firstChild
+      child = el.firstChild;
     }
     return fragment;
   },
@@ -73,14 +73,12 @@ Compile.prototype = {
    */
   compileText: function (node, exp) {
     var self = this;
-
     Transit(this.vm, exp, function (value) {
       self.updateText(node, value);
     })
 
     // var initText = this.vm[exp];
     // this.updateText(node, initText);
-
     // new Watcher(this.vm, exp, function (value) {
     //   self.updateText(node, value);
     // });
@@ -104,18 +102,20 @@ Compile.prototype = {
   compileModel: function (node, vm, exp, dir) {
     var self = this;
 
-    // ps: hello world (因为在mvvm.js文件中有个Object.defineProperty会往vm中添加data中的各个属性)
+    // ps: hello world (因为在index.js文件中有个Object.defineProperty会往vm中添加data中的各个属性)
     var val = this.vm[exp];
-    this.modelUpdater(node, val); // 页面赋值 hello world
+    // this.modelUpdater(node, val); // 页面赋值 hello world
+
+    // 这里需要的原因是: 当其他地方更改了这个 data属性,那么输入框的值也要跟着改变
+    // 还有就是第一次渲染时最初的渲染值
     new Watcher(this.vm, exp, function (value) {
-      self.modelUpdater(node, value); // 每次 title变化的时候页面会重新赋值
+      self.modelUpdater(node, value);
     });
 
+    // 添加 input事件,在触发时会对 data重新赋值,在重新赋值的过程中又会重新渲染页面
     node.addEventListener('input', function (e) {
       var newValue = e.target.value;
-      if (val === newValue) {
-        return;
-      }
+      if (val === newValue) return;
       self.vm[exp] = newValue; // this.title 赋值
       val = newValue;
     });
