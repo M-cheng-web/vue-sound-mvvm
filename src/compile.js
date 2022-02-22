@@ -22,14 +22,14 @@ Compile.prototype = {
     var fragment = document.createDocumentFragment();
     var child = el.firstChild;
     while (child) {
-      // 将Dom元素移入fragment中
-      fragment.appendChild(child);
+      fragment.appendChild(child); // 将Dom元素移入fragment中
       child = el.firstChild;
     }
     return fragment;
   },
   compileElement: function (el) {
     var childNodes = el.childNodes;
+    console.log('childNodes', childNodes);
     var self = this;
     [].slice.call(childNodes).forEach(function (node) {
       var reg = /\{\{(.*)\}\}/;

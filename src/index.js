@@ -12,7 +12,7 @@ function MVVM(options) {
   Object.keys(this.data).forEach((key) => {
     // 遍历 data中所有的属性放入到 Vue实例中
     // 相当于是给 data的一个代理
-    // 这样的目的是能让外部t通过 this[key] 的方式直接调用 this.data里的值
+    // 这样的目的是能让外部通过 this[key] 的方式直接调用 this.data里的值
     this.proxyKeys(key);
   });
 

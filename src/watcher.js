@@ -59,8 +59,7 @@ Watcher.prototype = {
       this.proxy.dirty = false; // 标记为不是脏的数据
       this.proxy.value = value; // 缓存数据,在数据不脏的时候直接拿这个缓存值
     }
-    // 取出依赖
-    popTarget();
+    popTarget(); // 取出依赖
     return value;
   },
 
