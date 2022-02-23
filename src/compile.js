@@ -1,6 +1,7 @@
 import Watcher from './watcher.js'
 import Transit from './transit.js'
 
+// html页面的功能实现,主要实现了v-model,v-on,{{title}}模板字符串功能
 function Compile(el, vm) {
   this.vm = vm;
   this.el = document.querySelector(el);
